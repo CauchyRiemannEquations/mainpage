@@ -1,15 +1,16 @@
 @import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700;800&display=swap");
 
 :root {
-  --ink: #1e293b;
-  --muted: #64748b;
-  --paper: #f8fafc;
+  --ink: #16191f;
+  --muted: #667085;
+  --paper: #fbfaf6;
   --panel: #ffffff;
-  --line: #dbe3ee;
-  --mint: #10b981;
-  --mint-soft: #dff8ed;
-  --slate-soft: #eef3f8;
-  --shadow: 0 18px 44px rgba(30, 41, 59, 0.1);
+  --line: #dedbd0;
+  --teal: #147d75;
+  --coral: #e65f4f;
+  --yellow: #f3bd3e;
+  --blue: #315f9f;
+  --shadow: 0 20px 55px rgba(28, 35, 45, 0.14);
   --font-main: "IBM Plex Sans KR", "Apple SD Gothic Neo", "Malgun Gothic",
     "Segoe UI", sans-serif;
 }
@@ -22,7 +23,6 @@ html {
   background: var(--paper);
   color: var(--ink);
   overflow-x: hidden;
-  scroll-behavior: smooth;
 }
 
 body {
@@ -44,112 +44,34 @@ a {
 main {
   min-height: 100vh;
   background:
-    linear-gradient(rgba(30, 41, 59, 0.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(30, 41, 59, 0.035) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, var(--paper) 510px),
     var(--paper);
-  background-size: 44px 44px;
-}
-
-.siteHeader {
-  position: sticky;
-  top: 0;
-  z-index: 10;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 24px;
-  padding: 18px max(20px, calc((100% - 1120px) / 2));
-  border-bottom: 1px solid rgba(219, 227, 238, 0.9);
-  background: rgba(248, 250, 252, 0.88);
-  backdrop-filter: blur(14px);
-}
-
-.brand {
-  display: inline-flex;
-  align-items: center;
-  min-width: 0;
-  gap: 10px;
-  color: var(--ink);
-  font-size: 1.05rem;
-  font-weight: 800;
-  text-decoration: none;
-}
-
-.brandMark {
-  width: 42px;
-  height: 28px;
-  display: inline-grid;
-  place-items: center;
-  flex: 0 0 auto;
-  border: 1px solid rgba(16, 185, 129, 0.32);
-  border-radius: 8px;
-  background: #ffffff;
-}
-
-.brandMark svg {
-  width: 34px;
-  height: 22px;
-  fill: none;
-}
-
-.brandMark path {
-  stroke: var(--ink);
-  stroke-linecap: round;
-  stroke-width: 2.4;
-}
-
-.brandMark path:first-child {
-  stroke: var(--mint);
-}
-
-.brandMark circle {
-  fill: var(--mint);
-}
-
-.siteNav {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  color: var(--muted);
-  font-size: 0.95rem;
-  font-weight: 700;
-}
-
-.siteNav a {
-  min-height: 36px;
-  display: inline-flex;
-  align-items: center;
-  padding: 0 10px;
-  border-radius: 8px;
-  text-decoration: none;
-}
-
-.siteNav a:hover {
-  background: var(--slate-soft);
-  color: var(--ink);
 }
 
 .hero {
   position: relative;
-  min-height: 520px;
+  min-height: clamp(340px, 54vh, 500px);
   overflow: hidden;
-  display: grid;
-  place-items: center;
-  padding: 76px 24px 88px;
+  display: flex;
+  align-items: flex-end;
+  padding: clamp(28px, 5vw, 72px);
   isolation: isolate;
 }
 
-.hero::before {
+.heroImage {
+  object-fit: cover;
+  object-position: center;
+  filter: saturate(0.98) contrast(0.96);
+  z-index: -3;
+}
+
+.heroShade {
   position: absolute;
-  inset: 28px min(5vw, 56px);
+  inset: 0;
   z-index: -2;
-  content: "";
-  border: 1px solid rgba(219, 227, 238, 0.78);
-  border-radius: 8px;
   background:
-    radial-gradient(circle at center, rgba(16, 185, 129, 0.09), transparent 56%),
-    rgba(255, 255, 255, 0.58);
+    linear-gradient(90deg, rgba(14, 19, 24, 0.84) 0%, rgba(14, 19, 24, 0.58) 38%, rgba(14, 19, 24, 0.08) 100%),
+    linear-gradient(0deg, rgba(18, 22, 26, 0.58) 0%, rgba(18, 22, 26, 0.1) 48%);
 }
 
 .heroGraph {
@@ -158,51 +80,42 @@ main {
   z-index: -1;
   width: 100%;
   height: 100%;
-  opacity: 0.78;
+  opacity: 0.48;
+  mix-blend-mode: screen;
 }
 
 .graphGrid {
   fill: none;
-  stroke: rgba(100, 116, 139, 0.16);
+  stroke: rgba(255, 250, 240, 0.16);
   stroke-width: 1;
 }
 
 .graphCurve {
   fill: none;
-  stroke: rgba(16, 185, 129, 0.34);
+  stroke: rgba(243, 189, 62, 0.52);
   stroke-linecap: round;
   stroke-width: 6;
 }
 
 .graphTangent {
   fill: none;
-  stroke: rgba(30, 41, 59, 0.44);
+  stroke: rgba(255, 250, 240, 0.48);
   stroke-linecap: round;
   stroke-width: 4;
 }
 
 .graphPoint {
-  fill: var(--mint);
-  stroke: #ffffff;
+  fill: var(--yellow);
+  stroke: rgba(255, 250, 240, 0.82);
   stroke-width: 4;
 }
 
 .heroContent {
+  position: relative;
   width: min(760px, 100%);
   min-width: 0;
-  text-align: center;
-}
-
-.heroKicker {
-  width: fit-content;
-  margin: 0 auto 18px;
-  padding: 7px 12px;
-  border: 1px solid rgba(16, 185, 129, 0.24);
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.76);
-  color: var(--mint);
-  font-size: 0.92rem;
-  font-weight: 800;
+  color: #fffaf0;
+  padding-bottom: clamp(6px, 2vw, 24px);
 }
 
 h1,
@@ -220,37 +133,27 @@ p {
 
 h1 {
   margin: 0;
-  color: var(--ink);
   font-family: var(--font-main);
-  font-size: 6.25rem;
   font-weight: 800;
-  line-height: 0.98;
+  font-size: clamp(3.2rem, 9vw, 7rem);
+  line-height: 0.96;
   letter-spacing: 0;
 }
 
 .heroCopy {
   width: min(620px, 100%);
-  margin: 22px auto 0;
-  color: var(--ink);
-  font-size: 1.28rem;
-  font-weight: 700;
-  line-height: 1.52;
-}
-
-.heroNote {
-  width: min(620px, 100%);
-  margin: 12px auto 0;
-  color: var(--muted);
-  font-size: 1rem;
+  margin: 20px 0 0;
+  color: rgba(255, 250, 240, 0.9);
+  font-size: clamp(1rem, 1.8vw, 1.22rem);
   font-weight: 500;
-  line-height: 1.7;
+  line-height: 1.55;
 }
 
 .catalog {
-  width: min(1120px, calc(100% - 32px));
+  width: min(1180px, calc(100% - 32px));
   min-width: 0;
-  margin: 0 auto;
-  padding: 28px 0 92px;
+  margin: clamp(24px, 4vw, 42px) auto 0;
+  padding-bottom: clamp(56px, 8vw, 96px);
 }
 
 .sidequestPanel {
@@ -278,7 +181,7 @@ h1 {
   padding: 0 14px;
   border: 1px solid var(--line);
   border-radius: 8px;
-  background: rgba(255, 255, 255, 0.82);
+  background: rgba(255, 255, 255, 0.78);
   color: var(--ink);
   cursor: pointer;
   font: inherit;
@@ -297,7 +200,7 @@ h1 {
 .filterButton[data-active="true"] {
   background: var(--ink);
   border-color: var(--ink);
-  color: #ffffff;
+  color: #fffaf0;
 }
 
 .filterButton strong {
@@ -316,24 +219,27 @@ h1 {
   width: 100%;
   max-width: 100%;
   min-width: 0;
-  min-height: 264px;
+  min-height: 286px;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 18px;
   padding: 22px;
   border: 1px solid var(--line);
-  border-top: 5px solid var(--mint);
   border-radius: 8px;
-  background: rgba(255, 255, 255, 0.92);
+  background: var(--panel);
   box-shadow: var(--shadow);
 }
 
+.sidequestCard:nth-child(3n + 1) {
+  border-top: 5px solid var(--teal);
+}
+
 .sidequestCard:nth-child(3n + 2) {
-  border-top-color: var(--ink);
+  border-top: 5px solid var(--coral);
 }
 
 .sidequestCard:nth-child(3n + 3) {
-  border-top-color: var(--muted);
+  border-top: 5px solid var(--blue);
 }
 
 .cardMeta {
@@ -353,16 +259,15 @@ h1 {
   max-width: 100%;
   padding: 0 10px;
   border-radius: 999px;
-  background: var(--mint-soft);
-  color: #047857;
+  background: #eef5f2;
+  color: var(--teal);
 }
 
 .sidequestCard h3 {
   margin: 0;
-  color: #0f172a;
   font-family: var(--font-main);
-  font-size: 1.55rem;
   font-weight: 800;
+  font-size: clamp(1.25rem, 2.5vw, 1.7rem);
   line-height: 1.35;
   letter-spacing: 0;
 }
@@ -382,18 +287,18 @@ h1 {
 
 .cardActions a {
   width: fit-content;
-  min-height: 38px;
+  min-height: 42px;
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  border-bottom: 2px solid var(--mint);
+  border-bottom: 2px solid var(--yellow);
   color: var(--ink);
   font-weight: 900;
   text-decoration: none;
 }
 
 .cardActions a:hover {
-  color: #047857;
+  color: var(--teal);
 }
 
 .cardActions .secondaryAction {
@@ -402,72 +307,43 @@ h1 {
 }
 
 .cardActions .secondaryAction:hover {
-  color: var(--ink);
+  color: var(--coral);
 }
 
 @media (max-width: 980px) {
   .cardGrid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
-
-  h1 {
-    font-size: 4.75rem;
-  }
 }
 
 @media (max-width: 680px) {
-  .siteHeader {
-    padding: 14px 16px;
-  }
-
-  .brand {
-    font-size: 1rem;
-  }
-
-  .siteNav {
-    display: none;
-  }
-
   .hero {
-    min-height: 430px;
-    padding: 48px 18px 58px;
+    min-height: 420px;
+    padding: 24px;
   }
 
-  .hero::before {
-    inset: 18px 12px;
+  .heroShade {
+    background:
+      linear-gradient(180deg, rgba(12, 17, 20, 0.5) 0%, rgba(12, 17, 20, 0.86) 100%),
+      linear-gradient(90deg, rgba(12, 17, 20, 0.78), rgba(12, 17, 20, 0.24));
   }
 
-  .heroKicker {
-    margin-bottom: 14px;
-    font-size: 0.84rem;
+  .heroGraph {
+    opacity: 0.38;
   }
 
   h1 {
-    font-size: 3.1rem;
-  }
-
-  .heroCopy {
-    margin-top: 16px;
-    font-size: 1.04rem;
-  }
-
-  .heroNote {
-    font-size: 0.94rem;
-    line-height: 1.62;
+    max-width: 10ch;
   }
 
   .catalog {
     width: min(440px, calc(100% - 28px));
-    padding-top: 18px;
+    margin-top: 22px;
     padding-bottom: 64px;
   }
 
   .sidequestPanel {
     gap: 14px;
-  }
-
-  .filters {
-    gap: 6px;
   }
 
   .filterButton {
