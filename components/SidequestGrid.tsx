@@ -52,11 +52,10 @@ export default function SidequestGrid({ items }: SidequestGridProps) {
       </div>
 
       <div className="cardGrid">
-        {filteredItems.map((item, index) => (
+        {filteredItems.map((item) => (
           <article className="sidequestCard" key={item.id}>
             <div className="cardMeta">
               <span>{item.kind}</span>
-              <span>{String(index + 1).padStart(2, "0")}</span>
             </div>
             <h3>{item.title}</h3>
             <p>{item.description}</p>

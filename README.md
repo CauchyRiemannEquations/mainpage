@@ -1,4 +1,4 @@
-# Teacher J's Sidequest
+# Tangent Lab
 
 Notion 데이터베이스를 카드형 홈페이지로 보여주는 Next.js 프로젝트입니다. `제목`, `유형/종류`, `링크`, `후기`, `설명` 열을 읽어서 종류별 필터가 있는 홈페이지로 보여줍니다.
 
@@ -122,7 +122,7 @@ Public, Private 둘 다 괜찮습니다. 혼자 관리할 사이트라면 Privat
 ```bash
 git init
 git add .
-git commit -m "Initial Teacher J's Sidequest site"
+git commit -m "Initial Tangent Lab site"
 git branch -M main
 git remote add origin https://github.com/내아이디/teacher-j-sidequest.git
 git push -u origin main

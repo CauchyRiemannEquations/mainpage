@@ -1,16 +1,15 @@
 @import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700;800&display=swap");
 
 :root {
-  --ink: #16191f;
-  --muted: #667085;
-  --paper: #fbfaf6;
+  --ink: #1e293b;
+  --muted: #64748b;
+  --paper: #f8fafc;
   --panel: #ffffff;
-  --line: #dedbd0;
-  --teal: #147d75;
-  --coral: #e65f4f;
-  --yellow: #f3bd3e;
-  --blue: #315f9f;
-  --shadow: 0 20px 55px rgba(28, 35, 45, 0.14);
+  --line: #dbe3ee;
+  --mint: #10b981;
+  --mint-soft: #dff8ed;
+  --slate-soft: #eef3f8;
+  --shadow: 0 18px 44px rgba(30, 41, 59, 0.1);
   --font-main: "IBM Plex Sans KR", "Apple SD Gothic Neo", "Malgun Gothic",
     "Segoe UI", sans-serif;
 }
@@ -23,6 +22,7 @@ html {
   background: var(--paper);
   color: var(--ink);
   overflow-x: hidden;
+  scroll-behavior: smooth;
 }
 
 body {
@@ -44,52 +44,165 @@ a {
 main {
   min-height: 100vh;
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, var(--paper) 510px),
+    linear-gradient(rgba(30, 41, 59, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(30, 41, 59, 0.035) 1px, transparent 1px),
     var(--paper);
+  background-size: 44px 44px;
+}
+
+.siteHeader {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 18px max(20px, calc((100% - 1120px) / 2));
+  border-bottom: 1px solid rgba(219, 227, 238, 0.9);
+  background: rgba(248, 250, 252, 0.88);
+  backdrop-filter: blur(14px);
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  min-width: 0;
+  gap: 10px;
+  color: var(--ink);
+  font-size: 1.05rem;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.brandMark {
+  width: 42px;
+  height: 28px;
+  display: inline-grid;
+  place-items: center;
+  flex: 0 0 auto;
+  border: 1px solid rgba(16, 185, 129, 0.32);
+  border-radius: 8px;
+  background: #ffffff;
+}
+
+.brandMark svg {
+  width: 34px;
+  height: 22px;
+  fill: none;
+}
+
+.brandMark path {
+  stroke: var(--ink);
+  stroke-linecap: round;
+  stroke-width: 2.4;
+}
+
+.brandMark path:first-child {
+  stroke: var(--mint);
+}
+
+.brandMark circle {
+  fill: var(--mint);
+}
+
+.siteNav {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--muted);
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.siteNav a {
+  min-height: 36px;
+  display: inline-flex;
+  align-items: center;
+  padding: 0 10px;
+  border-radius: 8px;
+  text-decoration: none;
+}
+
+.siteNav a:hover {
+  background: var(--slate-soft);
+  color: var(--ink);
 }
 
 .hero {
   position: relative;
-  min-height: clamp(340px, 54vh, 500px);
+  min-height: 520px;
   overflow: hidden;
-  display: flex;
-  align-items: flex-end;
-  padding: clamp(28px, 5vw, 72px);
+  display: grid;
+  place-items: center;
+  padding: 76px 24px 88px;
+  isolation: isolate;
 }
 
-.heroImage {
-  object-fit: cover;
-  object-position: center;
-  filter: saturate(0.98) contrast(0.96);
+.hero::before {
+  position: absolute;
+  inset: 28px min(5vw, 56px);
+  z-index: -2;
+  content: "";
+  border: 1px solid rgba(219, 227, 238, 0.78);
+  border-radius: 8px;
+  background:
+    radial-gradient(circle at center, rgba(16, 185, 129, 0.09), transparent 56%),
+    rgba(255, 255, 255, 0.58);
 }
 
-.heroShade {
+.heroGraph {
   position: absolute;
   inset: 0;
-  background:
-    linear-gradient(90deg, rgba(14, 19, 24, 0.82) 0%, rgba(14, 19, 24, 0.55) 38%, rgba(14, 19, 24, 0.04) 100%),
-    linear-gradient(0deg, rgba(18, 22, 26, 0.55) 0%, rgba(18, 22, 26, 0.08) 48%);
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  opacity: 0.78;
+}
+
+.graphGrid {
+  fill: none;
+  stroke: rgba(100, 116, 139, 0.16);
+  stroke-width: 1;
+}
+
+.graphCurve {
+  fill: none;
+  stroke: rgba(16, 185, 129, 0.34);
+  stroke-linecap: round;
+  stroke-width: 6;
+}
+
+.graphTangent {
+  fill: none;
+  stroke: rgba(30, 41, 59, 0.44);
+  stroke-linecap: round;
+  stroke-width: 4;
+}
+
+.graphPoint {
+  fill: var(--mint);
+  stroke: #ffffff;
+  stroke-width: 4;
 }
 
 .heroContent {
-  position: relative;
   width: min(760px, 100%);
   min-width: 0;
-  color: #fffaf0;
-  padding-bottom: clamp(6px, 2vw, 24px);
+  text-align: center;
 }
 
-.eyebrow {
-  margin: 0 0 12px;
-  color: var(--coral);
-  font-size: 0.82rem;
+.heroKicker {
+  width: fit-content;
+  margin: 0 auto 18px;
+  padding: 7px 12px;
+  border: 1px solid rgba(16, 185, 129, 0.24);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.76);
+  color: var(--mint);
+  font-size: 0.92rem;
   font-weight: 800;
-  letter-spacing: 0;
-  text-transform: uppercase;
-}
-
-.hero .eyebrow {
-  color: var(--yellow);
 }
 
 h1,
@@ -107,44 +220,37 @@ p {
 
 h1 {
   margin: 0;
+  color: var(--ink);
   font-family: var(--font-main);
+  font-size: 6.25rem;
   font-weight: 800;
-  font-size: clamp(3rem, 9vw, 6.8rem);
-  line-height: 0.96;
+  line-height: 0.98;
   letter-spacing: 0;
-}
-
-h1 span {
-  display: block;
 }
 
 .heroCopy {
   width: min(620px, 100%);
-  margin: 20px 0 0;
-  display: grid;
-  gap: 4px;
-  color: rgba(255, 250, 240, 0.88);
-  font-size: clamp(1rem, 1.8vw, 1.22rem);
-  font-weight: 500;
-  line-height: 1.55;
+  margin: 22px auto 0;
+  color: var(--ink);
+  font-size: 1.28rem;
+  font-weight: 700;
+  line-height: 1.52;
 }
 
-.heroCopy span {
-  display: block;
+.heroNote {
+  width: min(620px, 100%);
+  margin: 12px auto 0;
+  color: var(--muted);
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.7;
 }
 
 .catalog {
-  width: min(1180px, calc(100% - 32px));
+  width: min(1120px, calc(100% - 32px));
   min-width: 0;
-  margin: clamp(24px, 4vw, 42px) auto 0;
-  padding-bottom: clamp(56px, 8vw, 96px);
-}
-
-.filterButton {
-  min-height: 40px;
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.78);
+  margin: 0 auto;
+  padding: 28px 0 92px;
 }
 
 .sidequestPanel {
@@ -162,6 +268,7 @@ h1 span {
 }
 
 .filterButton {
+  min-height: 40px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -169,6 +276,9 @@ h1 span {
   gap: 10px;
   min-width: 88px;
   padding: 0 14px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.82);
   color: var(--ink);
   cursor: pointer;
   font: inherit;
@@ -187,7 +297,7 @@ h1 span {
 .filterButton[data-active="true"] {
   background: var(--ink);
   border-color: var(--ink);
-  color: #fffaf0;
+  color: #ffffff;
 }
 
 .filterButton strong {
@@ -197,7 +307,7 @@ h1 span {
 
 .cardGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 16px;
   min-width: 0;
 }
@@ -206,55 +316,53 @@ h1 span {
   width: 100%;
   max-width: 100%;
   min-width: 0;
-  min-height: 286px;
+  min-height: 264px;
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 16px;
   padding: 22px;
   border: 1px solid var(--line);
+  border-top: 5px solid var(--mint);
   border-radius: 8px;
-  background: var(--panel);
+  background: rgba(255, 255, 255, 0.92);
   box-shadow: var(--shadow);
 }
 
-.sidequestCard:nth-child(3n + 1) {
-  border-top: 5px solid var(--teal);
-}
-
 .sidequestCard:nth-child(3n + 2) {
-  border-top: 5px solid var(--coral);
+  border-top-color: var(--ink);
 }
 
 .sidequestCard:nth-child(3n + 3) {
-  border-top: 5px solid var(--blue);
+  border-top-color: var(--muted);
 }
 
 .cardMeta {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   gap: 12px;
   color: var(--muted);
   font-size: 0.82rem;
   font-weight: 800;
 }
 
-.cardMeta span:first-child {
+.cardMeta span {
   min-height: 28px;
   display: inline-flex;
   align-items: center;
-  max-width: 75%;
+  max-width: 100%;
   padding: 0 10px;
   border-radius: 999px;
-  background: #eef5f2;
-  color: var(--teal);
+  background: var(--mint-soft);
+  color: #047857;
 }
 
 .sidequestCard h3 {
   margin: 0;
+  color: #0f172a;
   font-family: var(--font-main);
+  font-size: 1.55rem;
   font-weight: 800;
-  font-size: clamp(1.25rem, 2.5vw, 1.7rem);
   line-height: 1.35;
   letter-spacing: 0;
 }
@@ -274,18 +382,18 @@ h1 span {
 
 .cardActions a {
   width: fit-content;
-  min-height: 42px;
+  min-height: 38px;
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  border-bottom: 2px solid var(--yellow);
+  border-bottom: 2px solid var(--mint);
   color: var(--ink);
   font-weight: 900;
   text-decoration: none;
 }
 
 .cardActions a:hover {
-  color: var(--teal);
+  color: #047857;
 }
 
 .cardActions .secondaryAction {
@@ -294,26 +402,109 @@ h1 span {
 }
 
 .cardActions .secondaryAction:hover {
-  color: var(--coral);
+  color: var(--ink);
 }
 
-@media (max-width: 680px) {
-  .hero {
-    min-height: 420px;
-    padding: 24px;
-  }
-
-  .heroShade {
-    background:
-      linear-gradient(180deg, rgba(12, 17, 20, 0.5) 0%, rgba(12, 17, 20, 0.86) 100%),
-      linear-gradient(90deg, rgba(12, 17, 20, 0.78), rgba(12, 17, 20, 0.24));
+@media (max-width: 980px) {
+  .cardGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   h1 {
-    max-width: 10ch;
+    font-size: 4.75rem;
+  }
+}
+
+@media (max-width: 680px) {
+  .siteHeader {
+    padding: 14px 16px;
+  }
+
+  .brand {
+    font-size: 1rem;
+  }
+
+  .siteNav {
+    display: none;
+  }
+
+  .hero {
+    min-height: 430px;
+    padding: 48px 18px 58px;
+  }
+
+  .hero::before {
+    inset: 18px 12px;
+  }
+
+  .heroKicker {
+    margin-bottom: 14px;
+    font-size: 0.84rem;
+  }
+
+  h1 {
+    font-size: 3.1rem;
+  }
+
+  .heroCopy {
+    margin-top: 16px;
+    font-size: 1.04rem;
+  }
+
+  .heroNote {
+    font-size: 0.94rem;
+    line-height: 1.62;
+  }
+
+  .catalog {
+    width: min(440px, calc(100% - 28px));
+    padding-top: 18px;
+    padding-bottom: 64px;
+  }
+
+  .sidequestPanel {
+    gap: 14px;
+  }
+
+  .filters {
+    gap: 6px;
+  }
+
+  .filterButton {
+    min-height: 36px;
+    min-width: 76px;
+    padding: 0 12px;
+    font-size: 0.9rem;
+  }
+
+  .cardGrid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
   }
 
   .sidequestCard {
-    min-height: 250px;
+    min-height: 0;
+    gap: 12px;
+    padding: 18px;
+  }
+
+  .cardMeta span {
+    min-height: 26px;
+    padding: 0 9px;
+  }
+
+  .sidequestCard h3 {
+    font-size: 1.24rem;
+    line-height: 1.34;
+  }
+
+  .sidequestCard p {
+    font-size: 0.94rem;
+    line-height: 1.56;
+  }
+
+  .cardActions a {
+    min-height: 34px;
+    font-size: 0.94rem;
   }
 }
