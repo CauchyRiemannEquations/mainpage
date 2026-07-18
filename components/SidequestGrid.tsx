@@ -10,15 +10,14 @@ type SidequestGridProps = {
 
 const allKindsLabel = "전체";
 
+// Bright, calm palette. Each unique kind maps to one entry (stable by order).
 const cardPalettes = [
-  { accent: "#147d75", soft: "#e7f3ef" },
-  { accent: "#e65f4f", soft: "#fff0ed" },
-  { accent: "#315f9f", soft: "#edf3fb" },
-  { accent: "#b7791f", soft: "#fff4d8" },
-  { accent: "#7c3aed", soft: "#f1eaff" },
-  { accent: "#c2410c", soft: "#fff1e8" },
-  { accent: "#0f766e", soft: "#e6f5f3" },
-  { accent: "#be123c", soft: "#ffe8ef" }
+  { accent: "#12b5a5", soft: "#f1fcfa", border: "#d3f2ec" },
+  { accent: "#3f7dff", soft: "#f2f6ff", border: "#dbe6ff" },
+  { accent: "#e0a323", soft: "#fff9ec", border: "#f6e7bf" },
+  { accent: "#e5533d", soft: "#fff2ef", border: "#fbd9d1" },
+  { accent: "#8b5cf6", soft: "#f6f1ff", border: "#e6dbff" },
+  { accent: "#0ea5a0", soft: "#effbfa", border: "#cdeeec" }
 ];
 
 export default function SidequestGrid({ items }: SidequestGridProps) {
@@ -31,66 +30,122 @@ export default function SidequestGrid({ items }: SidequestGridProps) {
     ];
   }, [items]);
 
+  // Assign a stable palette to each kind by its order of appearance.
+  const paletteByKind = useMemo(() => {
+    const map = new Map<string, (typeof cardPalettes)[number]>();
+    let i = 0;
+    for (const item of items) {
+      if (item.kind && !map.has(item.kind)) {
+        map.set(item.kind, cardPalettes[i % cardPalettes.length]);
+        i += 1;
+      }
+    }
+    return map;
+  }, [items]);
+
   const filteredItems = useMemo(() => {
     if (activeKind === allKindsLabel) {
       return items;
     }
-
     return items.filter((item) => item.kind === activeKind);
   }, [activeKind, items]);
 
+  const now = new Date();
+  const stamp = `updated ${now.getFullYear()}.${String(now.getMonth() + 1).padStart(2, "0")}`;
+
   return (
-    <div className="sidequestPanel">
-      <div className="filters" aria-label="종류 필터">
-        {kinds.map((kind) => {
-          const count =
-            kind === allKindsLabel
-              ? items.length
-              : items.filter((item) => item.kind === kind).length;
+    <div className="labShell">
+      <aside className="labSidebar">
+        <div>
+          <div className="brand">
+            Tangent
+            <br />
+            Lab
+          </div>
+          <div className="brandCopy">
+            교실 아이디어가
+            <br />
+            옆길로 새는 작업실
+          </div>
+        </div>
 
-          return (
-            <button
-              className="filterButton"
-              data-active={activeKind === kind}
-              key={kind}
-              onClick={() => setActiveKind(kind)}
-              type="button"
-            >
-              <span>{kind}</span>
-              <strong>{count}</strong>
-            </button>
-          );
-        })}
-      </div>
+        <div>
+          <div className="filterHead">FILTER</div>
+          <div className="filters" aria-label="종류 필터">
+            {kinds.map((kind) => {
+              const count =
+                kind === allKindsLabel
+                  ? items.length
+                  : items.filter((item) => item.kind === kind).length;
 
-      <div className="cardGrid">
-        {filteredItems.map((item, index) => {
-          const palette = cardPalettes[index % cardPalettes.length];
-          const style = {
-            "--card-accent": palette.accent,
-            "--card-accent-soft": palette.soft
-          } as CSSProperties;
+              return (
+                <button
+                  className="filterButton"
+                  data-active={activeKind === kind}
+                  key={kind}
+                  onClick={() => setActiveKind(kind)}
+                  type="button"
+                >
+                  <span>{kind}</span>
+                  <span className="count">{count}</span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      </aside>
 
-          return (
-            <article className="sidequestCard" key={item.id} style={style}>
-              <div className="cardMeta">
-                <span>{item.kind}</span>
-              </div>
-              <h3>{item.title}</h3>
-              <p>{item.description}</p>
-              <div className="cardActions">
-                <a className="primaryAction" href={item.link} rel="noreferrer" target="_blank">
-                  실행하기 <span aria-hidden="true">↗</span>
-                </a>
-                {item.reviewLink ? (
-                  <a className="secondaryAction" href={item.reviewLink} rel="noreferrer" target="_blank">
-                    후기 보기 <span aria-hidden="true">↗</span>
+      <div className="labMain">
+        <div className="mainHead">
+          <span className="title">
+            {activeKind === allKindsLabel ? "전체 작업" : activeKind}{" "}
+            <span>{filteredItems.length}</span>
+          </span>
+          <span className="stamp">{stamp}</span>
+        </div>
+
+        <div className="cardGrid">
+          {filteredItems.map((item) => {
+            const palette =
+              paletteByKind.get(item.kind) ?? cardPalettes[0];
+            const style = {
+              "--card-accent": palette.accent,
+              "--card-soft": palette.soft,
+              "--card-border": palette.border
+            } as CSSProperties;
+
+            return (
+              <article className="sidequestCard" key={item.id} style={style}>
+                <div className="cardMeta">
+                  <span className="dot" aria-hidden="true" />
+                  <span className="kind">{item.kind}</span>
+                </div>
+                <h3>{item.title}</h3>
+                <p>{item.description}</p>
+                <div className="cardActions">
+                  <a
+                    className="primaryAction"
+                    href={item.link}
+                    rel="noreferrer"
+                    target="_blank"
+                  >
+                    실행하기 →
                   </a>
-                ) : null}
-              </div>
-            </article>
-          );
-        })}
+                  {item.reviewLink ? (
+                    <a
+                      className="secondaryAction"
+                      href={item.reviewLink}
+                      rel="noreferrer"
+                      target="_blank"
+                    >
+                      후기 보기
+                    </a>
+                  ) : null}
+                </div>
+              </article>
+            );
+          })}
+        </div>
       </div>
     </div>
   );
