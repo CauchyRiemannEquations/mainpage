@@ -10,14 +10,15 @@ type SidequestGridProps = {
 
 const allKindsLabel = "전체";
 
-// Bright, calm palette. Each unique kind maps to one entry (stable by order).
+// Warm, earthy palette tuned to the ivory paper background.
+// Each unique kind maps to one entry (stable by order).
 const cardPalettes = [
-  { accent: "#12b5a5", soft: "#f1fcfa", border: "#d3f2ec" },
-  { accent: "#3f7dff", soft: "#f2f6ff", border: "#dbe6ff" },
-  { accent: "#e0a323", soft: "#fff9ec", border: "#f6e7bf" },
-  { accent: "#e5533d", soft: "#fff2ef", border: "#fbd9d1" },
-  { accent: "#8b5cf6", soft: "#f6f1ff", border: "#e6dbff" },
-  { accent: "#0ea5a0", soft: "#effbfa", border: "#cdeeec" }
+  { accent: "#2a9d8f", soft: "#eff7f3", border: "#d5e7df" },
+  { accent: "#c2552f", soft: "#fbf1ea", border: "#eed8c9" },
+  { accent: "#b0821a", soft: "#faf4e4", border: "#eadfc0" },
+  { accent: "#47679e", soft: "#f0f3f7", border: "#d8dfeb" },
+  { accent: "#8a5a9e", soft: "#f6f1f7", border: "#e4d8e8" },
+  { accent: "#5c7c46", soft: "#f2f6ec", border: "#dde7d0" }
 ];
 
 export default function SidequestGrid({ items }: SidequestGridProps) {
